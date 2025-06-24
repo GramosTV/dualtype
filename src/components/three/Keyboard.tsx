@@ -1,8 +1,8 @@
-import * as THREE from "three";
-import React, { useEffect, useMemo, useState, Suspense } from "react";
-import { useGLTF, useTexture, useProgress, Html } from "@react-three/drei";
-import { GLTF } from "three/examples/jsm/Addons.js";
-import { DRACOLoader, KTX2Loader } from "three-stdlib";
+import * as THREE from 'three';
+import React, { useEffect, useMemo, useState, Suspense } from 'react';
+import { useGLTF, useTexture, useProgress, Html } from '@react-three/drei';
+import { GLTF } from 'three/examples/jsm/Addons.js';
+import { DRACOLoader, KTX2Loader } from 'three-stdlib';
 
 // Define the mesh structure for your specific model
 interface GLTFResult extends GLTF {
@@ -27,9 +27,7 @@ const LoadingIndicator = () => {
   const { progress } = useProgress();
   return (
     <Html center>
-      <div style={{ color: 'white', fontSize: '1.5em' }}>
-        {Math.round(progress)}% loaded
-      </div>
+      <div style={{ color: 'white', fontSize: '1.5em' }}>{Math.round(progress)}% loaded</div>
     </Html>
   );
 };
@@ -42,7 +40,7 @@ export const Keyboard: React.FC<KeyboardProps> = ({ size, board, ...props }) => 
     setScale(size);
     setboards(board);
   }, [size, scale, boards, board]);
-  
+
   // Configure Draco loader path
   const dracoLoader = useMemo(() => {
     const loader = new DRACOLoader();
@@ -56,10 +54,10 @@ export const Keyboard: React.FC<KeyboardProps> = ({ size, board, ...props }) => 
     loader.setTranscoderPath('https://www.gstatic.com/basis-universal/versioned/2021-04-15-ba1c3e4/');
     return loader;
   }, []);
-  
+
   // Use generic type parameter instead of type assertion with 'any'
   const { nodes } = useGLTF(
-    "/3d/object/customczysta2.gltf", 
+    '/assets/models/object/customczysta2.gltf',
     true, // Load with draco
     undefined,
     (loader) => {
@@ -68,25 +66,21 @@ export const Keyboard: React.FC<KeyboardProps> = ({ size, board, ...props }) => 
       loader.setKTX2Loader(ktx2Loader);
     }
   ) as unknown as GLTFResult;
-  
+
   // Fix texture paths to match your project structure
   const roughness = useTexture(
-    "/3d/object/Poliigon_BoucleFabricBubbly_7827_Metallic_2K_jpg-Poliigon_BoucleFabricBubbly_7827_Roughness_2K_jpg.png"
+    '/assets/models/object/Poliigon_BoucleFabricBubbly_7827_Metallic_2K_jpg-Poliigon_BoucleFabricBubbly_7827_Roughness_2K_jpg.png'
   );
-  
-  const shader = useTexture(
-    "/3d/object/Poliigon_BoucleFabricBubbly_7827_Normal.png"
-  );
-  
-  const base = useTexture(
-    "/3d/object/Poliigon_BoucleFabricBubbly_7827_BaseColor.jpg"
-  );
+
+  const shader = useTexture('/assets/models/object/Poliigon_BoucleFabricBubbly_7827_Normal.png');
+
+  const base = useTexture('/assets/models/object/Poliigon_BoucleFabricBubbly_7827_BaseColor.jpg');
 
   const gripMaterial = useMemo(() => {
     const material = new THREE.MeshStandardMaterial({
       roughnessMap: roughness,
       bumpMap: base,
-      color: board || "#282828",
+      color: board || '#282828',
       roughness: 0.55,
       bumpScale: 6,
       side: THREE.DoubleSide,
@@ -99,7 +93,7 @@ export const Keyboard: React.FC<KeyboardProps> = ({ size, board, ...props }) => 
       shader.needsUpdate = true;
       base.anisotropy = 6;
     }
-    
+
     if (base) {
       base.wrapS = THREE.RepeatWrapping;
       base.wrapT = THREE.RepeatWrapping;
@@ -110,12 +104,12 @@ export const Keyboard: React.FC<KeyboardProps> = ({ size, board, ...props }) => 
 
     return material;
   }, [roughness, base, board, shader]);
-  
+
   const keycaps = useMemo(() => {
     const material = new THREE.MeshStandardMaterial({
       roughnessMap: base,
       bumpMap: roughness,
-      color: size || "#282828",
+      color: size || '#282828',
       roughness: 0.75,
       bumpScale: 6,
       metalness: 0,
@@ -128,11 +122,11 @@ export const Keyboard: React.FC<KeyboardProps> = ({ size, board, ...props }) => 
   if (size) {
     keycaps.color = new THREE.Color(size);
   }
-  
+
   if (board) {
     gripMaterial.color = new THREE.Color(board);
   }
-  
+
   return (
     <Suspense fallback={<LoadingIndicator />}>
       <group {...props} dispose={null}>
@@ -178,18 +172,13 @@ export const Keyboard: React.FC<KeyboardProps> = ({ size, board, ...props }) => 
 };
 
 // Preload with Draco and KTX2 support
-useGLTF.preload(
-  "/3d/object/customczysta2.gltf", 
-  true,
-  undefined,
-  (loader) => {
-    const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
-    
-    const ktx2Loader = new KTX2Loader();
-    ktx2Loader.setTranscoderPath('https://www.gstatic.com/basis-universal/versioned/2021-04-15-ba1c3e4/');
-    
-    loader.setDRACOLoader(dracoLoader);
-    loader.setKTX2Loader(ktx2Loader);
-  }
-);
+useGLTF.preload('/assets/models/object/customczysta2.gltf', true, undefined, (loader) => {
+  const dracoLoader = new DRACOLoader();
+  dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+
+  const ktx2Loader = new KTX2Loader();
+  ktx2Loader.setTranscoderPath('https://www.gstatic.com/basis-universal/versioned/2021-04-15-ba1c3e4/');
+
+  loader.setDRACOLoader(dracoLoader);
+  loader.setKTX2Loader(ktx2Loader);
+});

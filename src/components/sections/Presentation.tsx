@@ -1,27 +1,23 @@
-"use client";
-import React, { useRef, useEffect, useState, useMemo, useCallback } from "react";
-import ThreeScene from "./ThreeScene";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import { GiCurlyWing } from "react-icons/gi";
+'use client';
+import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react';
+import { ThreeScene } from '@/components/three';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import { GiCurlyWing } from 'react-icons/gi';
+import Image from 'next/image';
 
-import Blurout from "./Blurout";
-import Image from "next/image";
-import Tag from "./tag";
-import HorizontalText from "./HorizontalText";
-import Switches from "./switches";
-import CleanAppear from "./CleanAppear";
-import StaggerBlurOut from "./StaggerBlurOut";
+import { Blurout, CleanAppear, StaggerBlurOut } from '@/components/animations';
+import { Tag, HorizontalText, Switches } from '@/components/ui';
 
 // Available colors for the keyboard and board
-const COLORS = ["#0d1b2a", "#282828", "#8C8C8C", "#FF4D00", "#FF3D27"];
+const COLORS = ['#0d1b2a', '#282828', '#8C8C8C', '#FF4D00', '#FF3D27'];
 // Define multiple color palettes as arrays of arrays
 const EXTENDEDCOLORS = [
-  ["#1e293b", "#334155", "#64748b", "#f59e0b"], // Dark blue to red palette
-  ["#0d1b2a", "#282828", "#8C8C8C", "#FF4D00"], // Dark to orange palette
-  ["#064e3b", "#065f46", "#047857", "#10b981"], // Green palette
-  ["#312e81", "#4338ca", "#6366f1"], // Indigo palette
-  ["#831843", "#9d174d"], // Pink palette
+  ['#1e293b', '#334155', '#64748b', '#f59e0b'], // Dark blue to red palette
+  ['#0d1b2a', '#282828', '#8C8C8C', '#FF4D00'], // Dark to orange palette
+  ['#064e3b', '#065f46', '#047857', '#10b981'], // Green palette
+  ['#312e81', '#4338ca', '#6366f1'], // Indigo palette
+  ['#831843', '#9d174d'], // Pink palette
 ];
 
 const Presentation: React.FC = () => {
@@ -31,34 +27,38 @@ const Presentation: React.FC = () => {
   const compatibleRef = useRef<HTMLDivElement>(null);
   const colorSwatchesRef = useRef<HTMLDivElement>(null);
   const [isRandom, setIsRandom] = useState(false);
-  const [color, setColor] = useState("#282828");
+  const [color, setColor] = useState('#282828');
   const [temporaryColor, setTemporaryColor] = useState<string | null>(null);
   const [hover, setHover] = useState(true);
-  const [colorBoard, setColorBoard] = useState("#282828");
-  const [temporaryColorBoard, setTemporaryColorBoard] = useState<string | null>(
-    null
-  );
+  const [colorBoard, setColorBoard] = useState('#282828');
+  const [temporaryColorBoard, setTemporaryColorBoard] = useState<string | null>(null);
 
   // Function to handle actual color selection - optimized with useCallback
-  const pickColor = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    setIsRandom(false);
-    if (hover === true) {
-      setColorBoard((e.target as HTMLDivElement).id);
-    } else {
-      setColor((e.target as HTMLDivElement).id);
-    }
-  }, [hover]);
+  const pickColor = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      setIsRandom(false);
+      if (hover === true) {
+        setColorBoard((e.target as HTMLDivElement).id);
+      } else {
+        setColor((e.target as HTMLDivElement).id);
+      }
+    },
+    [hover]
+  );
 
   // Handle color hover preview effect - optimized with useCallback
-  const handleColorHover = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    setIsRandom(false);
-    const colorId = (e.target as HTMLDivElement).id;
-    if (hover === true) {
-      setTemporaryColorBoard(colorId);
-    } else {
-      setTemporaryColor(colorId);
-    }
-  }, [hover]);
+  const handleColorHover = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      setIsRandom(false);
+      const colorId = (e.target as HTMLDivElement).id;
+      if (hover === true) {
+        setTemporaryColorBoard(colorId);
+      } else {
+        setTemporaryColor(colorId);
+      }
+    },
+    [hover]
+  );
 
   // Reset temporary color when mouse leaves - optimized with useCallback
   const handleColorLeave = useCallback(() => {
@@ -70,18 +70,18 @@ const Presentation: React.FC = () => {
   useEffect(() => {
     // Register GSAP plugins inside useEffect
     gsap.registerPlugin(ScrollTrigger);
-    
+
     if (!colorSwatchesRef.current) return;
 
     // Initialize all extended colors as hidden
-    gsap.set(".extendedcolor", {
+    gsap.set('.extendedcolor', {
       opacity: 0,
-      filter: "blur(20px)",
+      filter: 'blur(20px)',
       y: 20,
     });
 
     // Get all color swatches
-    const swatches = colorSwatchesRef.current.querySelectorAll(".color-swatch");
+    const swatches = colorSwatchesRef.current.querySelectorAll('.color-swatch');
 
     if (swatches.length === 0) return;
 
@@ -91,19 +91,17 @@ const Presentation: React.FC = () => {
     // Setup animations for each swatch
     swatches.forEach((swatch, index) => {
       // Get the matching palette of extended colors
-      const targetedExtendedColors = document.querySelectorAll(
-        `#palette-${index} .extendedcolor`
-      );
+      const targetedExtendedColors = document.querySelectorAll(`#palette-${index} .extendedcolor`);
 
       // Create hover-in animation
       const handleMouseEnter = () => {
         gsap.to(targetedExtendedColors, {
           y: 0,
           opacity: 1,
-          filter: "blur(0px)",
+          filter: 'blur(0px)',
           duration: 0.3,
           stagger: 0.05,
-          ease: "power2.out",
+          ease: 'power2.out',
         });
       };
 
@@ -119,16 +117,16 @@ const Presentation: React.FC = () => {
       };
 
       // Add event listeners
-      swatch.addEventListener("mouseenter", handlers[index].enter);
-      swatch.addEventListener("mouseleave", handlers[index].leave);
+      swatch.addEventListener('mouseenter', handlers[index].enter);
+      swatch.addEventListener('mouseleave', handlers[index].leave);
     });
 
     // Cleanup function
     return () => {
       swatches.forEach((swatch, index) => {
         if (handlers[index]) {
-          swatch.removeEventListener("mouseenter", handlers[index].enter);
-          swatch.removeEventListener("mouseleave", handlers[index].leave);
+          swatch.removeEventListener('mouseenter', handlers[index].enter);
+          swatch.removeEventListener('mouseleave', handlers[index].leave);
         }
       });
     };
@@ -137,36 +135,30 @@ const Presentation: React.FC = () => {
   // Random color interval effect
   useEffect(() => {
     if (!isRandom) return;
-    
+
     const colorInterval = setInterval(() => {
       const newRandomIndex = Math.floor(Math.random() * COLORS.length);
       const newRandomIndex2 = Math.floor(Math.random() * COLORS.length);
       setColor(COLORS[newRandomIndex]);
       setColorBoard(COLORS[newRandomIndex2]);
     }, 1000);
-    
+
     return () => clearInterval(colorInterval);
   }, [isRandom]);
 
   // Main animation setup
   useEffect(() => {
-    if (
-      !container.current ||
-      !ref.current ||
-      !text.current ||
-      !compatibleRef.current
-    )
-      return;
+    if (!container.current || !ref.current || !text.current || !compatibleRef.current) return;
 
     // "Compatible" section animation
-    gsap.to("#compatible", {
+    gsap.to('#compatible', {
       scrollTrigger: {
-        trigger: "#compatible",
-        start: "top center",
-        end: "top bottom",
+        trigger: '#compatible',
+        start: 'top center',
+        end: 'top bottom',
         scrub: 1,
       },
-      ease: "power2.inOut",
+      ease: 'power2.inOut',
       duration: 0.1,
       onComplete: () => {
         setIsRandom(true);
@@ -174,114 +166,114 @@ const Presentation: React.FC = () => {
     });
 
     // Circle clip path animation
-    gsap.set("#circle", {
-      clipPath: "ellipse(43% 0% at 50% 49%)",
+    gsap.set('#circle', {
+      clipPath: 'ellipse(43% 0% at 50% 49%)',
     });
 
-    gsap.to("#circle", {
+    gsap.to('#circle', {
       scrollTrigger: {
-        trigger: "#circle",
-        start: "top bottom",
-        end: "center center",
+        trigger: '#circle',
+        start: 'top bottom',
+        end: 'center center',
         scrub: 1,
       },
-      ease: "power2.inOut",
-      clipPath: "ellipse(43% 6% at 50% 67%)",
+      ease: 'power2.inOut',
+      clipPath: 'ellipse(43% 6% at 50% 67%)',
     });
 
     // Main scroll animation timeline
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container.current,
-        start: "top top",
-        end: "bottom bottom",
+        start: 'top top',
+        end: 'bottom bottom',
         scrub: 1,
       },
     });
 
     tl.to(ref.current, {
-      y: "-20%",
-      ease: "power1.out",
+      y: '-20%',
+      ease: 'power1.out',
     });
-    gsap.set("#blur-section", {
-      filter: "blur(100px)",
+    gsap.set('#blur-section', {
+      filter: 'blur(100px)',
       scale: 0.95,
     });
-    gsap.from("#blur-section", {
-      filter: "blur(100px)",
+    gsap.from('#blur-section', {
+      filter: 'blur(100px)',
       scale: 0.95,
     });
-    gsap.to("#blur-section", {
+    gsap.to('#blur-section', {
       scrollTrigger: {
-        trigger: "#blur-section",
-        start: "top bottom",
-        end: "center bottom",
+        trigger: '#blur-section',
+        start: 'top bottom',
+        end: 'center bottom',
         scrub: 1,
       },
       scale: 0.99,
-      filter: "blur(0px)",
+      filter: 'blur(0px)',
     });
 
-    gsap.to("#blur-section", {
+    gsap.to('#blur-section', {
       scrollTrigger: {
-        trigger: "#blur-section",
-        start: "center center",
-        end: "bottom center",
+        trigger: '#blur-section',
+        start: 'center center',
+        end: 'bottom center',
         scrub: 1,
       },
-      ease: "power2.inOut",
+      ease: 'power2.inOut',
       duration: 0.1,
       scale: 0.8,
     });
 
     tl.to(
-      "#bgcircle",
+      '#bgcircle',
       {
-        width: "50vw",
+        width: '50vw',
         opacity: 0.1,
-        height: "50vw",
+        height: '50vw',
       },
-      "<"
+      '<'
     );
 
     tl.to(
-      "#con",
+      '#con',
       {
-        marginTop: "0",
+        marginTop: '0',
       },
-      "<"
+      '<'
     );
 
     tl.to(
-      "#compatible",
+      '#compatible',
       {
-        y: "-100%",
+        y: '-100%',
       },
-      "<"
+      '<'
     );
 
     tl.to(
       text.current,
       {
         opacity: 0.7,
-        y: "-20%",
+        y: '-20%',
         scale: 0.9,
-        filter: "blur(34px)",
+        filter: 'blur(34px)',
       },
-      "<"
+      '<'
     );
-    
-    gsap.set("#workplace", { height: "0px", skewY: "-10deg" });
-    gsap.to("#workplace", {
+
+    gsap.set('#workplace', { height: '0px', skewY: '-10deg' });
+    gsap.to('#workplace', {
       scrollTrigger: {
-        trigger: "#workplacecon",
-        start: "top center",
-        end: "center center",
+        trigger: '#workplacecon',
+        start: 'top center',
+        end: 'center center',
         scrub: 1,
       },
       duration: 0.5,
-      height: "100%",
-      skewY: "0deg",
+      height: '100%',
+      skewY: '0deg',
     });
 
     // Cleanup function
@@ -296,84 +288,80 @@ const Presentation: React.FC = () => {
   const activeColorBoard = useMemo(() => temporaryColorBoard || colorBoard, [temporaryColorBoard, colorBoard]);
 
   // Memoize the ThreeScene component to prevent unnecessary re-renders
-  const memoizedThreeScene = useMemo(() => (
-    <ThreeScene board={activeColorBoard} color={activeColor} />
-  ), [activeColorBoard, activeColor]);
+  const memoizedThreeScene = useMemo(
+    () => <ThreeScene board={activeColorBoard} color={activeColor} />,
+    [activeColorBoard, activeColor]
+  );
 
   // Memoize color swatches to prevent unnecessary re-renders
-  const colorSwatches = useMemo(() => (
-    COLORS.map((item, i) => (
-      <div
-        className="w-fit relative pt-[2px] px-[2px] group"
-        key={`color-wrapper-${i}`}
-      >
-        <div
-          className={`w-[2.5vw] thecolor hover:scale-[60%] transform duration-300 h-[2.5vw] rounded-[3px] cursor-pointer color-swatch ${
-            i === 0 ? "first-swatch" : ""
-          }`}
-          id={item}
-          data-index={i}
-          key={`coloring-${i}`}
-          onClick={pickColor}
-          onMouseEnter={handleColorHover}
-          onMouseLeave={handleColorLeave}
-          style={{
-            backgroundColor: item,
-            clipPath:
-              "polygon(0 0, 95% 0, 100% 15%, 100% 100%, 100% 100%, 10% 100%, 0 80%, 0 0)",
-          }}
-          aria-label={`Select color ${item}`}
-        ></div>
-      </div>
-    ))
-  ), [pickColor, handleColorHover, handleColorLeave]);
+  const colorSwatches = useMemo(
+    () =>
+      COLORS.map((item, i) => (
+        <div className="w-fit relative pt-[2px] px-[2px] group" key={`color-wrapper-${i}`}>
+          <div
+            className={`w-[2.5vw] thecolor hover:scale-[60%] transform duration-300 h-[2.5vw] rounded-[3px] cursor-pointer color-swatch ${
+              i === 0 ? 'first-swatch' : ''
+            }`}
+            id={item}
+            data-index={i}
+            key={`coloring-${i}`}
+            onClick={pickColor}
+            onMouseEnter={handleColorHover}
+            onMouseLeave={handleColorLeave}
+            style={{
+              backgroundColor: item,
+              clipPath: 'polygon(0 0, 95% 0, 100% 15%, 100% 100%, 100% 100%, 10% 100%, 0 80%, 0 0)',
+            }}
+            aria-label={`Select color ${item}`}
+          ></div>
+        </div>
+      )),
+    [pickColor, handleColorHover, handleColorLeave]
+  );
 
   // Memoize extended color palettes to prevent unnecessary re-renders
-  const extendedColorPalettes = useMemo(() => (
-    EXTENDEDCOLORS.map((ex, it) => (
-      <div
-        key={`palette-${it}`}
-        id={`palette-${it}`}
-        aria-label={`Select color ${ex}`}
-      >
-        {ex.map((e, idx) => (
-          <div
-            key={`group-${it}-${idx}`}
-            className="grouped p-[2px] hover:scale-75 duration-300 h-[2.5vw] cursor-pointer"
-          >
+  const extendedColorPalettes = useMemo(
+    () =>
+      EXTENDEDCOLORS.map((ex, it) => (
+        <div key={`palette-${it}`} id={`palette-${it}`} aria-label={`Select color ${ex}`}>
+          {ex.map((e, idx) => (
             <div
-              key={`color-${it}-${idx}skibidi`}
-              id={`color-${it}-${idx}papa`}
-              style={{
-                // Only apply initial hidden style to palette-0
-                ...(it === 0
-                  ? {
-                      opacity: 0,
-                      transform: "translateY(20px)",
-                    }
-                  : {}),
-              }}
-              className="w-[2.5vw] extendedcolor transform duration-100 ease-out h-[2.5vw] rounded-[3px]"
+              key={`group-${it}-${idx}`}
+              className="grouped p-[2px] hover:scale-75 duration-300 h-[2.5vw] cursor-pointer"
             >
               <div
-                key={`color-${it}-${idx}`}
-                id={e}
-                onClick={pickColor}
-                onMouseEnter={handleColorHover}
-                onMouseLeave={handleColorLeave}
+                key={`color-${it}-${idx}skibidi`}
+                id={`color-${it}-${idx}papa`}
                 style={{
-                  backgroundColor: e,
-                  clipPath:
-                    "polygon(0 0, 95% 0, 100% 15%, 100% 100%, 100% 100%, 10% 100%, 0 80%, 0 0)",
+                  // Only apply initial hidden style to palette-0
+                  ...(it === 0
+                    ? {
+                        opacity: 0,
+                        transform: 'translateY(20px)',
+                      }
+                    : {}),
                 }}
-                className="w-[2.5vw] h-[2.5vw] rounded-[3px]"
-              ></div>
+                className="w-[2.5vw] extendedcolor transform duration-100 ease-out h-[2.5vw] rounded-[3px]"
+              >
+                <div
+                  key={`color-${it}-${idx}`}
+                  id={e}
+                  onClick={pickColor}
+                  onMouseEnter={handleColorHover}
+                  onMouseLeave={handleColorLeave}
+                  style={{
+                    backgroundColor: e,
+                    clipPath: 'polygon(0 0, 95% 0, 100% 15%, 100% 100%, 100% 100%, 10% 100%, 0 80%, 0 0)',
+                  }}
+                  className="w-[2.5vw] h-[2.5vw] rounded-[3px]"
+                ></div>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    ))
-  ), [pickColor, handleColorHover, handleColorLeave]);
+          ))}
+        </div>
+      )),
+    [pickColor, handleColorHover, handleColorLeave]
+  );
 
   // Helper function for hover state changes (memoized)
   const handleHoverChange = useCallback((value: boolean) => () => setHover(value), []);
@@ -385,26 +373,22 @@ const Presentation: React.FC = () => {
         id="scroll-container"
         className="flex flex-col items-center justify-start z-[] relative w-full h-[190vh]"
       >
-        {" "}
-        <div
-          id="workplacecon"
-          className="h-[70vh] absolute bottom-[35vh] w-[35vw]  mr-[5vw] "
-        >
+        {' '}
+        <div id="workplacecon" className="h-[70vh] absolute bottom-[35vh] w-[35vw]  mr-[5vw] ">
           <div
             id="workplace"
             className=" h-0 rounded-2xl bg-[#b6b6b610] backdrop-blur-md border-[#ffffff1a] border-[1px] border-dashed "
           ></div>
         </div>
         <div
-          style={{ backgroundColor: "#FFFFFF" }}
+          style={{ backgroundColor: '#FFFFFF' }}
           className="filter  opacity-[15%] w-[50vw] h-[35vw] z-[-10] bottom-[10vh] ] absolute blur-[284px]"
         ></div>
         <div
           id="compatible"
           ref={compatibleRef}
           style={{
-            clipPath:
-              " polygon(10% 0, 100% 0, 100% 85%, 90% 100%, 0 100%, 0 15%)",
+            clipPath: ' polygon(10% 0, 100% 0, 100% 85%, 90% 100%, 0 100%, 0 15%)',
           }}
           className="absolute top-[59vh]   w-[15vw] left-[40.8vw]"
         >
@@ -452,40 +436,30 @@ const Presentation: React.FC = () => {
             <div className="opacity-60">52°13′48″N, 21°0040″E</div>
           </div>
         </Blurout>
-        <div
-          id="con"
-          className="w-[100%] h-[200vh] z-[1000] flex flex-col items-center justify-center absolute"
-        ></div>
+        <div id="con" className="w-[100%] h-[200vh] z-[1000] flex flex-col items-center justify-center absolute"></div>
         <div className="z-[-10000] mt-[50vh] opacity-35 blur-[8px]  absolute">
           <HorizontalText></HorizontalText>
         </div>
-        <div
-          id="threescene"
-          ref={ref}
-          className="mt-[-33vh] w-[80vw] h-[180vh]  flex items-start justify-center"
-        >
+        <div id="threescene" ref={ref} className="mt-[-33vh] w-[80vw] h-[180vh]  flex items-start justify-center">
           {memoizedThreeScene}
         </div>
         <div className="h-[100vh] relative flex w-[90vw] justify-center items-center mt-[-100vh]">
           <div className="absolute top-0 gap-[3vh] text-[60px] flex-col tracking-tighter leading-[100%] left-0">
             <div className="text-[20px] leading-none tracking-tighter">
-              <div className="leading-none text-[14px] mb-[1vh] opacity-50">
-                (Keyboard)
-              </div>
+              <div className="leading-none text-[14px] mb-[1vh] opacity-50">(Keyboard)</div>
             </div>
 
             <div className="flex  flex-col text-[3.1vw] leading-[90%] tracking-tighter w-[30vw]">
               <div className="mb-[1vh]">
-                <CleanAppear>Perfect Keyboard</CleanAppear>{" "}
-                <CleanAppear> Justified For You</CleanAppear>
+                <CleanAppear>Perfect Keyboard</CleanAppear> <CleanAppear> Justified For You</CleanAppear>
               </div>
 
               <div className="flex">
                 <div className="flex flex-col item justify-center relative  text-[24px] w-fit tracking-tighter">
                   <div className="flex mb-[1.5vh] items-center gap-2">
-                    {" "}
+                    {' '}
                     <div className=" relative h-fit  w-fit ">
-                      {" "}
+                      {' '}
                       <div className=" absolute flex w-full  h-full opacity-50 overflow-hidden z-[10000]">
                         <div
                           onMouseEnter={handleHoverChange(true)}
@@ -499,7 +473,7 @@ const Presentation: React.FC = () => {
                         ></div>
                       </div>
                       <Switches value={hover} />
-                    </div>{" "}
+                    </div>{' '}
                   </div>
 
                   <div className=" h-fit flex w-fit z-[1111] items-center flex-row-reverse">
@@ -509,21 +483,15 @@ const Presentation: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="flex z-[10000]">
-                    {extendedColorPalettes}
-                  </div>
-                  <div className="text-[14px] opacity-40 tracking-tight ">
-                    (Unlimited Color Options)
-                  </div>
+                  <div className="flex z-[10000]">{extendedColorPalettes}</div>
+                  <div className="text-[14px] opacity-40 tracking-tight ">(Unlimited Color Options)</div>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="absolute top-0  w-[25vw]  right-0">
-            <div className="leading-none tracking-tighter text-[14px] mb-[1vh] opacity-50">
-              (Keyboard)
-            </div>
+            <div className="leading-none tracking-tighter text-[14px] mb-[1vh] opacity-50">(Keyboard)</div>
 
             <div className="tracking-tighter leading-[100%] text-[2.2vw]">
               <CleanAppear> Your Dream Keyboard has</CleanAppear>
@@ -531,29 +499,27 @@ const Presentation: React.FC = () => {
                 <div
                   style={{
                     backgroundColor: color,
-                    clipPath:
-                      " polygon(0 0, 95% 0, 100% 15%, 100% 100%, 100% 100%, 10% 100%, 0 80%, 0 0)",
+                    clipPath: ' polygon(0 0, 95% 0, 100% 15%, 100% 100%, 100% 100%, 10% 100%, 0 80%, 0 0)',
                   }}
                   className="w-[1.5vw]   h-[1.5vw]"
                 >
-                  {" "}
-                </div>{" "}
+                  {' '}
+                </div>{' '}
                 <CleanAppear> Board & </CleanAppear>
                 <div
                   style={{
                     backgroundColor: colorBoard,
-                    clipPath:
-                      " polygon(0 0, 95% 0, 100% 15%, 100% 100%, 100% 100%, 10% 100%, 0 80%, 0 0)",
+                    clipPath: ' polygon(0 0, 95% 0, 100% 15%, 100% 100%, 100% 100%, 10% 100%, 0 80%, 0 0)',
                   }}
                   className="w-[1.5vw]  h-[1.5vw]"
                 >
-                  {" "}
+                  {' '}
                 </div>
-                <CleanAppear>Keycaps.</CleanAppear>{" "}
+                <CleanAppear>Keycaps.</CleanAppear>{' '}
               </div>
             </div>
 
-            <div >
+            <div>
               <StaggerBlurOut className="flex gap-[0.5vw] mt-[2vh] flex-wrap w-[25vw]">
                 <Tag color="bg-[#212121]">Manufactured in Poland</Tag>
                 <Tag color="bg-[#212121]">Cable length: 2(m)</Tag>
@@ -572,13 +538,13 @@ const Presentation: React.FC = () => {
             <div
               id="circle"
               className=" w-[20vw] z-[-10] mt-[20vh] mr-[2vw] opacity-20 h-[20vw] bg-white"
-              style={{ clipPath: "ellipse(43% 60% at 50% 49%)" }}
+              style={{ clipPath: 'ellipse(43% 60% at 50% 49%)' }}
             ></div>
           </div>
 
           <div className=" absolute bottom-[50vh] mr-[0vw]  opacity-[5%] rotate-[90deg] z-[-10000]">
             <Image
-              src={"/svg/Vector.svg"}
+              src={'/assets/icons/Vector.svg'}
               width={1000}
               height={1000}
               alt="xx"
@@ -594,12 +560,8 @@ const Presentation: React.FC = () => {
         ></div>
       </div>
       <div></div>
-   
     </div>
   );
 };
 
 export default Presentation;
-
-
-

@@ -1,10 +1,7 @@
-
-
-import Feature from "./Feature";
-import StaggerBlurOut from "./StaggerBlurOut";
+import { Feature } from '@/components/sections';
+import StaggerBlurOut from './StaggerBlurOut';
 
 // Register plugin once
-
 
 interface FeaturesAppearProps {
   delay?: number;
@@ -57,16 +54,15 @@ const FeaturesAppear: React.FC<FeaturesAppearProps> = () => {
     //   id="features"
     //   className=""
     // >
-    <StaggerBlurOut  delay={.5} stagger={.5} className=" md:my-0  w-full h-fit my-[10vh] md:flex-row flex-col flex md:gap-0 gap-[5vh] overflow-hidden">
-      <Feature description="combining ergonomic design, and premium craftsmanship.">
-        Best Quality
-      </Feature>
-      <Feature description="our clients are our top priority. we're always here for you.">
-        We Stay in Touch
-      </Feature>
-      <Feature description="Your setup shapes your comfort, productivity, and experience">
-        Think About it
-      </Feature></StaggerBlurOut>
+    <StaggerBlurOut
+      delay={0.5}
+      stagger={0.5}
+      className=" md:my-0  w-full h-fit my-[10vh] md:flex-row flex-col flex md:gap-0 gap-[5vh] overflow-hidden"
+    >
+      <Feature description="combining ergonomic design, and premium craftsmanship.">Best Quality</Feature>
+      <Feature description="our clients are our top priority. we're always here for you.">We Stay in Touch</Feature>
+      <Feature description="Your setup shapes your comfort, productivity, and experience">Think About it</Feature>
+    </StaggerBlurOut>
     // </div>
   );
 };

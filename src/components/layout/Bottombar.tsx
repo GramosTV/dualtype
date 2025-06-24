@@ -1,9 +1,8 @@
-"use client";
-import React, { useEffect, useRef, memo, useState } from "react";
-import Btn from "./Btn";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import Links from "./Links";
+'use client';
+import React, { useEffect, useRef, memo, useState } from 'react';
+import { Button, Links } from '@/components/ui';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -26,20 +25,14 @@ const Bottombar: React.FC = () => {
 
   useEffect(() => {
     // Only set up animations when component is loaded
-    if (
-      !isLoaded ||
-      !bottombarRef.current ||
-      !innerRef.current ||
-      !footerRef.current
-    )
-      return;
+    if (!isLoaded || !bottombarRef.current || !innerRef.current || !footerRef.current) return;
 
     // Preload any images in the footer to prevent flashing during animation
     const preloadImages = () => {
       // Find all image elements within the footer
-      const images = footerRef.current?.querySelectorAll("img") || [];
+      const images = footerRef.current?.querySelectorAll('img') || [];
       images.forEach((img) => {
-        const src = img.getAttribute("src");
+        const src = img.getAttribute('src');
         if (src) {
           const preloadImage = new Image();
           preloadImage.src = src;
@@ -51,30 +44,30 @@ const Bottombar: React.FC = () => {
     // Create a GSAP context for proper cleanup
     const ctx = gsap.context(() => {
       // Set initial styles to prevent flicker
-      gsap.set(innerRef.current, { height: "fit-content", display: "flex" });
-      gsap.set(footerRef.current, { display: "none" });
+      gsap.set(innerRef.current, { height: 'fit-content', display: 'flex' });
+      gsap.set(footerRef.current, { display: 'none' });
 
       // Create the animation to expand the height
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: document.documentElement, // Use documentElement for more reliable triggering
-          start: "98% bottom", // Slightly before reaching bottom
-          end: "bottom bottom",
-          toggleActions: "play none none reverse",
-          markers: process.env.NODE_ENV === "development", // Only in development
+          start: '98% bottom', // Slightly before reaching bottom
+          end: 'bottom bottom',
+          toggleActions: 'play none none reverse',
+          markers: process.env.NODE_ENV === 'development', // Only in development
           once: false, // Allow repeated triggers
           onEnter: () => {
             // Add pointer-events when expanded
             if (bottombarRef.current) {
-              bottombarRef.current.classList.remove("pointer-events-none");
-              bottombarRef.current.classList.add("pointer-events-auto");
+              bottombarRef.current.classList.remove('pointer-events-none');
+              bottombarRef.current.classList.add('pointer-events-auto');
             }
           },
           onLeaveBack: () => {
             // Remove pointer-events when collapsed
             if (bottombarRef.current) {
-              bottombarRef.current.classList.add("pointer-events-none");
-              bottombarRef.current.classList.remove("pointer-events-auto");
+              bottombarRef.current.classList.add('pointer-events-none');
+              bottombarRef.current.classList.remove('pointer-events-auto');
             }
           },
         },
@@ -84,30 +77,30 @@ const Bottombar: React.FC = () => {
       tl.to(
         innerRef.current,
         {
-          height: "88vh",
-          alignItems: "start",
+          height: '88vh',
+          alignItems: 'start',
           duration: 0.9,
-          ease: "power3.out",
+          ease: 'power3.out',
         },
         0
       )
         .to(
           bottombarRef.current,
           {
-            alignItems: "start",
+            alignItems: 'start',
             duration: 0.9,
-            ease: "power3.out",
+            ease: 'power3.out',
           },
           0
         )
         .to(
           footerRef.current,
           {
-            display: "block",
+            display: 'block',
             opacity: 0,
-            translateY: "-5%",
+            translateY: '-5%',
             duration: 0,
-            filter: "blur(15px)",
+            filter: 'blur(15px)',
           },
           0
         )
@@ -116,10 +109,10 @@ const Bottombar: React.FC = () => {
           {
             opacity: 1,
             delay: 0.5,
-            duration: .9,
-            filter: "blur(0px)",
-            translateY: "0%",
-            ease: "power4.out",
+            duration: 0.9,
+            filter: 'blur(0px)',
+            translateY: '0%',
+            ease: 'power4.out',
           },
           0.2
         ); // Delay footer appearance for smoother effect
@@ -133,7 +126,7 @@ const Bottombar: React.FC = () => {
       id="bottombar"
       ref={bottombarRef}
       className={`h-fit pointer-events-none fixed bottom-0 z-[10000000] flex w-full items-end justify-center transition-opacity ${
-        isLoaded ? "opacity-100" : "opacity-0"
+        isLoaded ? 'opacity-100' : 'opacity-0'
       }`}
     >
       <div
@@ -143,11 +136,11 @@ const Bottombar: React.FC = () => {
         <div className="z-[110000] w-full items-center flex justify-between">
           <h2 className="text-upheader">handmade keyboards</h2>
           <div className="leading-[110%] uppercase md:block hidden text-[12px] text-desc opacity-50">
-            Probably my favorite page. <br />I used to avoid this kind of{" "}
+            Probably my favorite page. <br />I used to avoid this kind of{' '}
           </div>
           <div className="md:hidden block bg-white text-black p-2">Creator</div>
           <div className="md:block hidden scale-90">
-            <Btn src="/svg/anarrow.svg">Chose your model</Btn>
+            <Button src="/assets/icons/anarrow.svg">Chose your model</Button>
           </div>
           <div className="leading-[110%] md:block hidden text-sm">
             <div>ECSPLITS</div>
@@ -167,18 +160,14 @@ const Bottombar: React.FC = () => {
               </div>
               <div className="flex gap-[3vw]">
                 <div className="flex flex-col gap-[.2vw]">
-                  <div className="font-bold text-[20px] tracking-tighter">
-                    CONTACT
-                  </div>
+                  <div className="font-bold text-[20px] tracking-tighter">CONTACT</div>
                   <div className="text-[0.7vw] leading-[120%] uppercase opacity-50">
                     support@ecsplits.com <br />
                     +48 123 456 789
                   </div>
                 </div>
                 <div className="flex flex-col gap-[.2vw]">
-                  <div className="font-bold text-[20px] tracking-tighter">
-                    ABOUT
-                  </div>
+                  <div className="font-bold text-[20px] tracking-tighter">ABOUT</div>
                   <div className="text-[0.7vw] leading-[120%] uppercase opacity-50">
                     Custom handmade keyboards <br /> designed typing experience.
                   </div>

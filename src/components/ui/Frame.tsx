@@ -1,9 +1,9 @@
-"use client";
-import React from "react";
-import Corner from "../../public/svg/Corner";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/src/ScrollTrigger";
-import { useEffect, useState } from "react";
+'use client';
+import React from 'react';
+import Corner from './Corner';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/src/ScrollTrigger';
+import { useEffect, useState } from 'react';
 const Frame = () => {
   const [scrollY, setScrollY] = useState(0);
   useEffect(() => {
@@ -11,17 +11,17 @@ const Frame = () => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   useEffect(() => {
     if (scrollY > 0) {
-      gsap.to("#frame", {
+      gsap.to('#frame', {
         y: scrollY,
-        ease: "power2.out",
+        ease: 'power2.out',
         duration: 0.5,
       });
     }

@@ -1,27 +1,24 @@
-"use client";
-import Navbar from "@/components/Navbar";
-const Header = React.lazy(() => import("@/components/Header"));
-import { Suspense } from "react";
-import gsap from "gsap";
-import Features from "@/components/Features";
-import { useEffect, useRef, useState } from "react";
-import React from "react";
-import Presentation from "@/components/Presentation";
-import ScrollTrigger from "gsap/src/ScrollTrigger";
+'use client';
+import { Suspense, useEffect, useRef, useState } from 'react';
+import React from 'react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/src/ScrollTrigger';
 
-import useLenisScroll from "@/components/Lenis";
-import Article from "@/components/article";
+// Layout Components
+import { Navbar, Footer, Bottombar } from '@/components/layout';
+const Header = React.lazy(() => import('@/components/layout/Header'));
 
-import Bottombar from "@/components/Bottombar";
+// Section Components
+import { Features, Presentation, Article, Reviews, Specifications, FromOrder } from '@/components/sections';
 
-import Rotation from "@/components/Rotation";
+// UI Components
+import { Frame } from '@/components/ui';
 
-import Reviews from "@/components/Reviews"; 
-import Specifications from "@/components/Specifications";
+// Animation Components
+import { Rotation } from '@/components/animations';
 
-import FromOrder from "@/components/FromOrder";
-import Footer from "@/components/Footer";
-import Frame from "@/components/Frame";
+// Hooks
+import useLenisScroll from '@/hooks/useLenis';
 
 gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
@@ -34,20 +31,20 @@ export default function Home() {
     setIsMobile(window.innerWidth < 768);
 
     // Lock the scroll and set initial properties when page is loading
-    document.body.style.cursor = "default";
+    document.body.style.cursor = 'default';
     window.scrollTo(0, 0);
 
     // Unlock after the loading time has completed (1000ms here)
     const timeout = setTimeout(() => {
       setIsLoading(false);
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     }, 1000);
 
     // Cleanup: revert styles to normal
     return () => {
       clearTimeout(timeout);
-      document.body.style.overflow = "auto";
-      document.body.style.overflowY = "default";
+      document.body.style.overflow = 'auto';
+      document.body.style.overflowY = 'default';
     };
   }, []);
 
@@ -55,13 +52,8 @@ export default function Home() {
   useLenisScroll(isLoading && !isMobile);
 
   return (
-    <div
-      id="thecontainer"
-      ref={scrollRef}
-      className="h-fit overflow-y-hidden  x  w-full flex items-center flex-col "
-    >
-  
-      <Frame/>
+    <div id="thecontainer" ref={scrollRef} className="h-fit overflow-y-hidden  x  w-full flex items-center flex-col ">
+      <Frame />
 
       <div className=" bg-black w-full   z-[110000]    h-[15vw] ] bottom-[0vh] opacity-85  translate-y-[70%] fixed blur-[40px]"></div>
       <Navbar />
@@ -76,7 +68,6 @@ export default function Home() {
       </Suspense>
 
       <div>
-       
         <Features></Features>
 
         <div className="w-[87vw]    gap-[3vw] my-[10vh] h-[90vh] md:h-[50vh] flex-col md:flex-row flex justify-between">
@@ -84,13 +75,13 @@ export default function Home() {
             title="made with precission
  and thought"
             desc="Probably my favorite page I used to avoid this kind."
-            img="/img/article1.png"
+            img="/assets/images/article1.png"
           />
 
           <Article
             title="Keycaps quality is the best always "
             desc="Probably my favorite page I used to avoid this kind."
-            img="/img/article2.png"
+            img="/assets/images/article2.png"
           />
         </div>
       </div>
@@ -101,26 +92,17 @@ export default function Home() {
       <div></div>
 
       <div className="h-fit w-full mt-[-15%] ">
-  
-     <FromOrder></FromOrder>
-         <div className="mb-[10vh]"></div>
+        <FromOrder></FromOrder>
+        <div className="mb-[10vh]"></div>
         <Rotation></Rotation>
       </div>
 
-      
-      <div className=" w-full flex items-start px-[3vw] justify-between mb-[4vh]">
-   
-  
-      </div>
+      <div className=" w-full flex items-start px-[3vw] justify-between mb-[4vh]"></div>
 
- 
+      <Specifications />
 
-      <Specifications/>
-
-   
-     
       <Reviews></Reviews>
-  <Footer></Footer>
+      <Footer></Footer>
     </div>
   );
 }
