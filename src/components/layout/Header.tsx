@@ -77,7 +77,7 @@ export default function Header() {
             <Appear delay={0.4}>
               <div className="opacity-45 text-[24px] tracking-tighter text-center mt-[1vh]">
                 {' '}
-                [ Product made for gamers, workers and gay people ]{' '}
+                [ Product made for gamers, workers and focused people ]{' '}
               </div>
             </Appear>
             <Appear delay={0.8}>
