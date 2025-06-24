@@ -143,8 +143,8 @@ const Bottombar: React.FC = () => {
             <Button src="/assets/icons/anarrow.svg">Chose your model</Button>
           </div>
           <div className="leading-[110%] md:block hidden text-sm">
-            <div>ECSPLITS</div>
-            <div className="opacity-50">(AVILABLE)</div>
+            <div>DUALTYPE</div>
+            <div className="opacity-50">(AVAILABLE)</div>
           </div>
         </div>
         <div ref={footerRef} className="bottom-footer hidden w-full">
@@ -155,14 +155,14 @@ const Bottombar: React.FC = () => {
                   Custom handmade <br /> your experience.
                 </h1>
                 <div className=" text-[.8vw] pt-8  font-bold uppercase">
-                  © {new Date().getFullYear()} ECSPLITS. All rights reserved.
+                  © {new Date().getFullYear()} DUALTYPE. All rights reserved.
                 </div>
               </div>
               <div className="flex gap-[3vw]">
                 <div className="flex flex-col gap-[.2vw]">
                   <div className="font-bold text-[20px] tracking-tighter">CONTACT</div>
                   <div className="text-[0.7vw] leading-[120%] uppercase opacity-50">
-                    support@ecsplits.com <br />
+                    support@dualtype.com <br />
                     +48 123 456 789
                   </div>
                 </div>

@@ -28,7 +28,7 @@ const About = () => {
             <div className="text-justified h-full ">Odkryj, nowe możliwości</div>
             <div className="  w-[17.5vw] ">
               <div>
-                ec.splits
+                dualtype
                 <br /> <br />
                 Od 2022 roku tworze dla was klawiatury, które są nie tylko wyjątkowe, ale także trwałe.
                 <br /> <br />

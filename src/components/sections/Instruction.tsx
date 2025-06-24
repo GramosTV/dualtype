@@ -14,11 +14,11 @@ const Instruction = () => {
           <Specification title="WIRELESS" data="NO" />
           <Specification title="INNER WIRE" add="(lenght)" data="OPTIONAL" />
           <Specification title="WARRANTY" data="2 YEARS" />
-          <Specification title="more details" add="(contact)" data="ECSPLITS@SUPPORT.PL" />
+          <Specification title="more details" add="(contact)" data="DUALTYPE@SUPPORT.COM" />
           <Specification title="WIRELESS" data="NO" />
           <Specification title="INNER WIRE" add="(lenght)" data="OPTIONAL" />
           <Specification title="WARRANTY" data="2 YEARS" />
-          <Specification title="more details" add="(contact)" data="ECSPLITS@SUPPORT.PL" />
+          <Specification title="more details" add="(contact)" data="DUALTYPE@SUPPORT.COM" />
         </StaggerBlurOut>
       </div>
       <div className="flex gap-[5%] my-[3.5vh] ml-[5vw]  l leading-[120%] tracking-tight opacity-45 text-[0.7vw]">

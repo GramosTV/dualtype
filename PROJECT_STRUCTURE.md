@@ -1,6 +1,6 @@
 # Project Structure
 
-This document outlines the organized file structure for the ECSplits project.
+This document outlines the organized file structure for the DualType project.
 
 ## 📁 Source Code Organization
 

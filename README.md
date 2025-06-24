@@ -1,36 +1,178 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DualType - Custom Keyboard UI/UX Demo
 
-## Getting Started
+A modern, interactive web experience showcasing custom mechanical keyboards through cutting-edge UI/UX design and 3D visualization.
 
-First, run the development server:
+## 🎯 Project Overview
+
+DualType is a **UI/UX demonstration project** that showcases advanced web design and user experience principles through an immersive custom keyboard showcase. This project demonstrates:
+
+- **Interactive 3D Animations** - Real-time keyboard visualization with Three.js
+- **Smooth Scroll Experiences** - Advanced GSAP animations and Lenis smooth scrolling
+- **Modern Design System** - Clean, organized component architecture
+- **Responsive Design** - Mobile-first approach with adaptive layouts
+- **Performance Optimization** - Optimized assets and efficient rendering
+
+## 🚀 Technologies Showcased
+
+### Frontend Framework
+
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type-safe development
+- **Tailwind CSS** - Utility-first styling
+
+### 3D Graphics & Animation
+
+- **Three.js** - 3D scene rendering
+- **React Three Fiber** - React integration for Three.js
+- **React Three Drei** - Useful Three.js helpers
+- **GSAP** - Professional animation library
+- **ScrollTrigger** - Scroll-based animations
+
+### User Experience
+
+- **Lenis** - Smooth scrolling library
+- **Framer Motion** - Advanced React animations
+- **Responsive Design** - Cross-device compatibility
+
+## 🎨 Design Features
+
+### Interactive Elements
+
+- **3D Keyboard Configurator** - Real-time color customization
+- **Scroll-triggered Animations** - Engaging user interactions
+- **Smooth Transitions** - Seamless page navigation
+- **Hover Effects** - Subtle micro-interactions
+
+### Visual Design
+
+- **Modern Typography** - Custom font implementation
+- **Color Theory** - Carefully crafted color palettes
+- **Layout Systems** - Grid-based responsive design
+- **Visual Hierarchy** - Clear information architecture
+
+## 🛠️ Getting Started
+
+### Prerequisites
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Node.js 18+
+npm or yarn package manager
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Clone the repository
+git clone [repository-url]
+cd dualtype-master
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Install dependencies
+npm install
 
-## Learn More
+# Start development server
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Development Commands
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Project Structure
 
-## Deploy on Vercel
+```
+src/
+├── components/
+│   ├── layout/      # Navigation, header, footer
+│   ├── sections/    # Page sections and content
+│   ├── ui/          # Reusable UI components
+│   ├── animations/  # Animation components
+│   └── three/       # Three.js 3D components
+├── hooks/           # Custom React hooks
+├── lib/             # Utility libraries
+└── types/           # TypeScript definitions
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+public/
+└── assets/
+    ├── images/      # Static images
+    ├── icons/       # SVG icons
+    ├── models/      # 3D models (.gltf)
+    ├── videos/      # Video content
+    └── fonts/       # Custom fonts
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎯 UI/UX Highlights
+
+### Design Principles
+
+- **Minimalism** - Clean, uncluttered interfaces
+- **Consistency** - Uniform design language throughout
+- **Accessibility** - WCAG compliant design choices
+- **Performance** - Optimized for fast loading and smooth interactions
+
+### User Experience Features
+
+- **Progressive Loading** - Smooth content reveal
+- **Contextual Animations** - Purposeful motion design
+- **Intuitive Navigation** - Clear user journey
+- **Visual Feedback** - Immediate response to user actions
+
+## 🔧 Technical Highlights
+
+### Performance Optimizations
+
+- **Component Organization** - Modular, reusable architecture
+- **Asset Optimization** - Compressed images and models
+- **Code Splitting** - Lazy loading for optimal performance
+- **Build Optimization** - Production-ready deployment
+
+### Advanced Features
+
+- **3D Model Loading** - GLTF/GLB with Draco compression
+- **Texture Management** - Efficient material handling
+- **Animation Systems** - Complex scroll-based interactions
+- **State Management** - Efficient React state handling
+
+## 📱 Responsive Design
+
+The project demonstrates responsive design principles across:
+
+- **Desktop** (1920px+) - Full 3D experience
+- **Tablet** (768px-1919px) - Adapted layouts
+- **Mobile** (320px-767px) - Optimized mobile experience
+
+## 🎨 Design System
+
+### Colors
+
+- **Primary Palette** - Dark themes with accent colors
+- **Interactive States** - Hover and active states
+- **Accessibility** - High contrast ratios
+
+### Typography
+
+- **Geist Font Family** - Modern, clean typeface
+- **Responsive Scaling** - Fluid typography system
+- **Hierarchy** - Clear text organization
+
+## 🚀 Demo Purpose
+
+This project serves as a **portfolio piece** demonstrating:
+
+- Advanced React/Next.js development
+- 3D web development capabilities
+- Modern UI/UX design principles
+- Performance optimization techniques
+- Professional code organization
+
+## 📄 License
+
+This project is a UI/UX demonstration and is intended for educational and portfolio purposes.
+
+---
+
+**Built with passion for great design and user experience** ✨

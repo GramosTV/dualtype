@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'ec.splits',
+  title: 'DualType',
   description: 'high quality custom keyboards',
   openGraph: {
     title: 'join the community',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/assets/images/thumb.png',
-        alt: 'ecsplits-custom keyboards',
+        alt: 'dualtype-custom keyboards',
       },
     ],
   },

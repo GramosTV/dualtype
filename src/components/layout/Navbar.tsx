@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <div className="w-full fixed flex justify-between z-[10099] items-center h-[6vh] overflow-hidden border-b-[1px] bg-[#0000000d] backdrop-blur-[100px]  border-[#ffffff66]">
       <div className="flex  justify-between items-center h-full  gap-4 px-10">
-        <div className="tracking-wide text-[20px] leading-[100%]">ec.splits</div>
+        <div className="tracking-wide text-[20px] leading-[100%]">dualtype</div>
 
         <div className="uppercase text-desc opacity-50 hidden md:block ">Rewriting Writing</div>
         <div className="opacity-50  hidden md:block">
