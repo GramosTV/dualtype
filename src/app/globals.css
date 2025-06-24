@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+
+  --foreground: #ffffff;
+}
+
+
+
+body {
+  color: var(--foreground);
+  height: fit-content;
+  background: black;
+  font-family: 'Arial'; 
+}
+p{
+  @apply text-[0.7vw] leading-[110%] uppercase tracking-tight opacity-60;
+}
+
+h1 {
+  @apply tracking-tighter capitalize leading-[100%] text-[5.0vw];
+  font-family: Arial;
+
+}h2{
+  
+  @apply tracking-tighter font-extralight leading-[100%] text-[1.35vw] capitalize;
+  font-family: Arial;
+
+}
+.clippath{
+ 
+
+ background-image: url("/svg/border.svg");
+ background-position: no-repeat;
+ background-size: cover;  
+
+}
+.filter{
+  backdrop-filter: brightness(1000%);
+}
+.radial{
+  border-radius: 99999px;
+  background: radial-gradient(#00000047, #00000096 , #000000af ,  #000000e0,  #000000);
+
+}
+.clipbtn{
+  background-color: white;
+  clip-path: polygon(0 0, 100% 0, 100% 10%, 100% 100%, 100% 100%, 0 100%, 4% 100%, 0 80%);
+}
+.clipborderbtn{
+  cursor: pointer;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+  clip-path: circle(0% at 50% 0%);
+}
+#thebtn:hover .clipborderbtn{
+  filter: invert(00%);
+  clip-path: circle(145% at 0% 50%);
+}#thebtn{
+  cursor: pointer;
+}
+.gradient-text {
+  background: linear-gradient(121deg, #ffffff,   rgba(224, 224, 224, 0.814));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+::selection{
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 72, 0);
+}
+.article{
+  cursor: pointer;
+  transition: all 800ms;
+}
+.article:hover .articlezoom{
+  transform: scale(1.02);
+}
+.articlezoom{
+  transition: all 800ms;
+}
+.group:hover .thecolor{
+  transform: scale(0.6);
+}
+
+.extendedcolor{
+  transition: all 800ms;
+}.extendedcolor:hover{
+  transition: all 800ms;
+  transform: scale(0.6);
+}
+
+.text-header{
+  @apply text-[12.5vw]  md:text-[6.5vw] leading-[95%] capitalize  ;
+}
+.text-upheader{
+  @apply text-[4vw] md:text-[1.7vw] leading-[95%] capitalize ;
+}
+.text-title{
+  @apply text-[8vw] md:text-[2.9vw] mb-[2vh]  leading-[100%] capitalize ;
+}.text-desc{
+  @apply text-[2vw] md:text-[0.65vw] leading-[100%] uppercase;;
+}
+/* .blocks-container{
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  width: 105vw;
+  height: 100vh;
+  overflow: hidden;
+} */
