@@ -1,5 +1,7 @@
 # DualType - Custom Keyboard UI/UX Demo
 
+![DualType Showcase](./public/assets/images/presentation.gif)
+
 A modern, interactive web experience showcasing custom mechanical keyboards through cutting-edge UI/UX design and 3D visualization.
 
 ## 🎯 Project Overview
